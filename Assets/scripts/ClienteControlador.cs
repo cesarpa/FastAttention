@@ -19,9 +19,11 @@ public class ClienteControlador : MonoBehaviour {
 
         if(gameObject.transform.position.x < xMaximo)
         {
-            Instantiate(enemigoACrear);
-            enemigoACrear.transform.Translate(gameObject.transform.position.x-5, gameObject.transform.position.y, gameObject.transform.position.z);
-            Destroy(gameObject);
+			if(enemigoACrear!=null){
+	            Instantiate(enemigoACrear);
+	            enemigoACrear.transform.Translate(gameObject.transform.position.x-5, gameObject.transform.position.y, gameObject.transform.position.z);
+	            Destroy(gameObject);
+			}
         }
     }
 

@@ -2,39 +2,12 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class Eat : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDragHandler {
-	#region IEndDragHandler implementation
+public class Eat : MonoBehaviour {
 
-	public void OnEndDrag (PointerEventData eventData)
-	{
-		throw new System.NotImplementedException ();
-	}
-
-	#endregion
-
-	#region IDragHandler implementation
-
-	public void OnDrag (PointerEventData eventData)
-	{
-		throw new System.NotImplementedException ();
-	}
-
-	#endregion
-
-	
-	#region IBeginDragHandler implementation
-	public void OnBeginDrag (PointerEventData eventData)
-	{
-		throw new System.NotImplementedException ();
-	}
-	#endregion
-
-	#region IBeginDragHandler implementation
-	void IBeginDragHandler.OnBeginDrag (PointerEventData eventData)
-	{
-		throw new System.NotImplementedException ();
-	}
-	#endregion
+	Vector3 dist;
+	float posX;
+	float posY;
+	public Camera mainCamare;
 
 	// Use this for initialization
 	void Start () {
@@ -43,13 +16,25 @@ public class Eat : MonoBehaviour, IBeginDragHandler,IDragHandler, IEndDragHandle
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//this.OnMouseDown();
+		//this.OnMouseDrag();
 	}
 
-	void OnMouseDrag() {
-		Debug.Log("Entro al drag and drop");
-		Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		point.y = gameObject.transform.position.y;
-		gameObject.transform.position = point;
+	void OnMouseDown(){
+		Debug.Log ("Entro al mousedown");
+		dist = Camera.main.WorldToScreenPoint(transform.position);
+		posX = Input.mousePosition.x - dist.x;
+		posY = Input.mousePosition.y - dist.y;
+
+	}
+
+	void OnMouseDrag(){
+		Debug.Log ("Entro al mousedrag");
+		Vector3 curPos = 
+			new Vector3(Input.mousePosition.x - posX, 
+				Input.mousePosition.y - posY, dist.z);  
+
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(curPos);
+		transform.position = worldPos;
 	}
 }

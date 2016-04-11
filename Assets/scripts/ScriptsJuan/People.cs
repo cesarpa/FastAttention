@@ -7,6 +7,8 @@ using System.Collections;
 */
 public class People : MonoBehaviour {
 
+
+	public GameObject selectAnterior;
 	private Ray pulsacion;
 	private RaycastHit colision;
 	//public GameObject objetoApuntador;
@@ -18,7 +20,7 @@ public class People : MonoBehaviour {
 	void Start () {
 		posicionAPuntador = new Vector3 (transform.position.x,transform.position.y+5,0);
 		//seleccionador = new Select ();
-		seleccionador = GameObject.FindGameObjectWithTag("Select").GetComponent<Select>();
+		//seleccionador = GameObject.FindGameObjectWithTag("Select").GetComponent<Select>();
 		escogido = false;
 	}
 
@@ -36,14 +38,24 @@ public class People : MonoBehaviour {
 			string nameCharacter = "";
 			if(Physics.Raycast(pulsacion,out colision))
 			{
-				nameCharacter = colision.collider.tag;
-				if(nameCharacter=="People"){
-					//CreateSelcterCharacter ();
-					if (seleccionador != null) {
+				if(this.gameObject==colision.transform.gameObject){
+					nameCharacter = colision.collider.tag;
+					if(nameCharacter=="People"){
+						//CreateSelcterCharacter ();
+						/*if (seleccionador != null) {
 						escogido = true;
 						seleccionador.getPosPeople(colision.transform);
+					}*/
+						if(selectAnterior==null){
+							selectAnterior = this.gameObject;
+						}
+						else if(selectAnterior!=null){
+							selectAnterior.gameObject.transform.FindChild("Select").gameObject.SetActive(false);
+						}
+						displaySelect ();
 					}
 				}
+
 			}
 		}
 	}
@@ -51,6 +63,12 @@ public class People : MonoBehaviour {
 	public bool getEscogido()
 	{
 		return this.escogido;
+	}
+
+	public void displaySelect()
+	{
+		GameObject objetoHijo = this.transform.FindChild("Select").gameObject;
+		objetoHijo.SetActive(true);
 	}
 
 	/*void CreateSelcterCharacter()

@@ -24,6 +24,7 @@ public class Select : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+
 		if (other.gameObject.tag == "People") {
 			GameObject objetoColision = other.gameObject;
 			//gameObject.transform.position.x += 1;

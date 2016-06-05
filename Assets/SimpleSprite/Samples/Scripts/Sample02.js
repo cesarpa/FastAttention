@@ -65,7 +65,7 @@ function Backward(){
 
 function Left(){
    while (true){
-      transform.position -= (Vector3.right * velocity)*Time.deltaTime;
+      transform.position -= (Vector3.right * velocity);
       yield WaitForSeconds (0);
    }
 

@@ -19,8 +19,8 @@ public class People : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		posicionAPuntador = new Vector3 (transform.position.x,transform.position.y+5,0);
-		//seleccionador = new Select ();
-		//seleccionador = GameObject.FindGameObjectWithTag("Select").GetComponent<Select>();
+		seleccionador = new Select ();
+		seleccionador = GameObject.FindGameObjectWithTag("Select").GetComponent<Select>();
 		escogido = false;
 	}
 
@@ -42,21 +42,23 @@ public class People : MonoBehaviour {
 					nameCharacter = colision.collider.tag;
 					if(nameCharacter=="People"){
 						//CreateSelcterCharacter ();
-						/*if (seleccionador != null) {
-						escogido = true;
-						seleccionador.getPosPeople(colision.transform);
-					}*/
-						if(selectAnterior==null){
-							selectAnterior = this.gameObject;
+						if (seleccionador != null) {
+							escogido = true;
+							seleccionador.getPosPeople(colision.transform);
+						}
+						/*if(selectAnterior==null){
+						//	selectAnterior = this.gameObject;
+							displaySelect ();
 						}
 						else if(selectAnterior!=null){
-							selectAnterior.gameObject.transform.FindChild("Select").gameObject.SetActive(false);
-						}
-						displaySelect ();
+							selectAnterior.SetActive(false);
+						}*/
+
 					}
 				}
 
 			}
+
 		}
 	}
 

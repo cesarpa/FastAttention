@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Select : MonoBehaviour {
 
+	 
+	float velocity = 1.0f;
+	Transform posObjectUpdate = null;
 	// Use this for initialization
 	void Start () {
 	
@@ -10,17 +13,28 @@ public class Select : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Left();
 	}
+
+
+	void Left(){
+		if (posObjectUpdate != null) {     
+			//transform.position -= (Vector3.right * velocity);
+			gameObject.transform.position = new Vector3 (posObjectUpdate.position.x, 
+				posObjectUpdate.position.y+2.0f,
+				posObjectUpdate.position.z);
+		}
+	}
+
 
 	public void getPosPeople(Transform posObject)
 	{
 		if (posObject != null) {
-			gameObject.transform.position = new Vector3 (posObject.position.x, 
-														 posObject.position.y+2.0f,
-														 posObject.position.z);
+			posObjectUpdate = posObject;
 		}
 	}
+
+
 
 	void OnTriggerEnter(Collider other)
 	{
